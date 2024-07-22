@@ -5,38 +5,27 @@ import { Ionicons } from "@expo/vector-icons";
 import Home from "./src/home";
 import Profile from "./src/profile";
 import Cart from "./src/cart";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Getstarted from "./src/getstarted/Getstarted";
+import Login from "./src/login";
+import Signup from "./src/signup/Signup";
+import TabNavigation from "./src/navigation/TabNavigation";
 
 export default function App() {
   const Tab = createBottomTabNavigator();
+  const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Home"
-          options={{
-            tabBarIcon: ({ focused }) => (
-              <Ionicons name="home" color={focused ? "blue" : ""} />
-            ),
-          }}
-          component={Home}
+      <Stack.Navigator>
+        <Stack.Screen name="getStarted" component={Getstarted} />
+        <Stack.Screen name="login" component={Login} />
+        <Stack.Screen name="signup" component={Signup} />
+        <Stack.Screen
+          name="tabs"
+          component={TabNavigation}
+          options={{ headerShown: false }}
         />
-        <Tab.Screen
-          name="Cart"
-          options={{
-            tabBarIcon: ({}) => <Ionicons name="caret-back" />,
-          }}
-          component={Cart}
-        />
-        <Tab.Screen
-          name="Profile"
-          options={{
-            tabBarIcon: ({ focused }) => (
-              <Ionicons name="person" color={focused ? "blue" : ""} />
-            ),
-          }}
-          component={Profile}
-        />
-      </Tab.Navigator>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
