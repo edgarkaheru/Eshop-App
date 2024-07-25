@@ -6,10 +6,14 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import useNavigate from "../hooks/useNavigate";
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  // console.log(username, password);
+
   const { handleNavigate } = useNavigate();
   const handlesignup = () => {
     handleNavigate("signup");
@@ -17,8 +21,20 @@ const Login = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
-      <TextInput style={styles.input} placeholder="Username" />
-      <TextInput style={styles.input} placeholder="Password" secureTextEntry />
+      <TextInput
+        style={styles.input}
+        value={username}
+        placeholder="Username"
+        onChangeText={(text) => setUsername(text)}
+      />
+      <TextInput
+        style={styles.input}
+        value={password}
+        placeholder="Password"
+        onChangeText={(text) => setPassword(text)}
+        secureTextEntry
+      />
+
       <Button title="Login" onPress={() => handleNavigate("tabs")} />
       <View style={styles.linksContainer}>
         <TouchableOpacity>
